@@ -2,7 +2,7 @@ const { app, Tray, Menu, globalShortcut } = require('electron');
 const path = require('path');
 const robot = require('@hurdlegroup/robotjs');
 
-let tray = null; //присвоили пустое значение 
+let tray = null;
 
 function createTray() {
     tray = new Tray(path.join(__dirname, 'icon-Template.png')); // Make sure you have this file
