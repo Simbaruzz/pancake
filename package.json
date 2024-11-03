@@ -1,0 +1,16 @@
+{
+    "name": "keyboard",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "start": "electron ."
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "@hurdlegroup/robotjs": "^0.12.2",
+      "electron": "^33.0.2"
+    }
+  }
