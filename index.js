@@ -1,12 +1,76 @@
 const { app, Tray, Menu, globalShortcut } = require('electron');
 const path = require('path');
 const robot = require('@hurdlegroup/robotjs');
+const packageJson = require('./package.json');
+
+const APP_NAME = 'hypetype';
+const APP_VERSION = packageJson.version;
+
+const SHORTCUTS_DICT = {
+    'Shift+Q': '⌀',
+    'Shift+W': '',
+    'Shift+E': '⌘',
+    'Shift+R': '⌥',
+    'Shift+T': '⇧',
+    'Shift+Y': '⇪',
+};
 
 let tray = null;
 
 function createTray() {
-    tray = new Tray(path.join(__dirname, 'icon-Template.png')); // Make sure you have this file
-    const contextMenu = Menu.buildFromTemplate([
+    tray = new Tray(path.join(__dirname, 'icon-Template.png'));
+
+    tray.setToolTip(`${APP_NAME}`);
+    tray.setContextMenu(createMenu());
+}
+
+function registerShortcuts() {
+    Object.keys(SHORTCUTS_DICT).forEach((key) => {
+        const value = SHORTCUTS_DICT[key];
+
+        console.log('Registering global shortcut:', key, 'for value:', value);
+
+        globalShortcut.register(key, () => {
+            pasteSpecialString(value);
+        });
+    });
+}
+
+function pasteSpecialString(stringToBePasted) {
+    console.log('Pasting special string:', stringToBePasted);
+
+    // Type the string at the current cursor position
+    robot.typeString(stringToBePasted);
+}
+
+function createMenu() {
+    const items = Object.keys(SHORTCUTS_DICT).map((key) => {
+        const value = SHORTCUTS_DICT[key];
+
+        return {
+            label: `${value}`,
+            accelerator: key,
+            click: () => {
+                pasteSpecialString(value);
+            }
+        };
+    });
+
+    const menu = Menu.buildFromTemplate([
+        {
+            label: `${APP_NAME} v${APP_VERSION}`,
+        },
+        {
+            type: 'separator'
+        },
+        {
+            label: 'Click to paste',
+            enabled: false
+        },
+        ...items,
+        {
+            type: 'separator'
+        },
         {
             label: 'Quit',
             click: () => {
@@ -15,33 +79,18 @@ function createTray() {
             }
         }
     ]);
-    tray.setToolTip('hypetype');
-    tray.setContextMenu(contextMenu);
+
+    return menu;
 }
 
 app.whenReady().then(() => {
     createTray();
-
-    globalShortcut.register('Shift+Q', () => {
-        pasteSpecialString();
-    });
+    registerShortcuts();
 });
 
 app.on('will-quit', () => {
     globalShortcut.unregisterAll();
 });
-
-
-
-// Function to simulate pasting text
-function pasteSpecialString() {
-    const specialString = "⌀";
-
-    console.log('Pasting special string:', specialString);
-
-    // Type the string at the current cursor position
-    robot.typeString(specialString);
-}
 
 app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') app.quit();
