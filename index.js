@@ -13,6 +13,9 @@ const SHORTCUTS_DICT = {
     'Shift+R': '⌥',
     'Shift+T': '⇧',
     'Shift+Y': '⇪',
+
+    'Ctrl+Alt+S': '⏎',
+    'AltGr+S': '⌫',
 };
 
 let tray = null;
