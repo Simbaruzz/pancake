@@ -1,16 +1,47 @@
 {
-    "name": "keyboard",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-      "start": "electron ."
+  "name": "hypetype",
+  "productName": "hypetype",
+  "version": "1.0.0",
+  "description": "Flow symbol type app",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "electron .",
+    "build": "yarn electron:prebuild && yarn electron:build",
+    "env-gen": "node ./bin/env-gen.js",
+    "electron:prebuild": "yarn electron:icons-gen",
+    "electron:build": "electron-builder",
+    "electron:icons-gen": "electron-icon-builder --input=./app/icons/app-icon.png --output=build --flatten && yarn electron:icons-gen:postrun",
+    "electron:icons-gen:postrun": "cp ./build/icons/icon.ico ./build && cp ./build/icons/icon.icns ./build && cp ./build/icons/1024x1024.png ./build/icon.png && rimraf ./build/icons",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "build": {
+    "appId": "ru.hypetype.keyboard",
+    "artifactName": "${productName}.${ext}",
+    "win": {
+      "target": "nsis"
     },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-      "@hurdlegroup/robotjs": "^0.12.2",
-      "electron": "^33.0.2"
+    "linux": {
+      "target": "AppImage"
     }
+  },
+  "dependencies": {
+    "auto-launch": "^5.0.6",
+    "electron-is-dev": "^3.0.1",
+    "import-fresh": "^3.3.0",
+    "open": "^10.1.0",
+    "winston": "^3.17.0",
+    "winston-daily-rotate-file": "^5.0.0"
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^3.7.1",
+    "@jitsi/robotjs": "^0.6.13",
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8",
+    "electron-icon-builder": "^2.0.1",
+    "rimraf": "^5.0.10"
   }
+}
