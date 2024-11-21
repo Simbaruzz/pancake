@@ -39,6 +39,7 @@
   "devDependencies": {
     "@electron/rebuild": "^3.7.1",
     "@jitsi/robotjs": "^0.6.13",
+    "cp": "^0.2.0",
     "electron": "^33.2.0",
     "electron-builder": "^25.1.8",
     "electron-icon-builder": "^2.0.1",
