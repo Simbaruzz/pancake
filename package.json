@@ -7,11 +7,11 @@
   "type": "module",
   "scripts": {
     "start": "electron .",
-    "build": "yarn electron:prebuild && yarn electron:build",
+    "build": "npm run electron:prebuild && npm run electron:build",
     "env-gen": "node ./bin/env-gen.js",
-    "electron:prebuild": "yarn electron:icons-gen",
+    "electron:prebuild": "npm run electron:icons-gen",
     "electron:build": "electron-builder",
-    "electron:icons-gen": "electron-icon-builder --input=./app/icons/app-icon.png --output=build --flatten && yarn electron:icons-gen:postrun",
+    "electron:icons-gen": "electron-icon-builder --input=./app/icons/app-icon.png --output=build --flatten && npm run electron:icons-gen:postrun",
     "electron:icons-gen:postrun": "cp ./build/icons/icon.ico ./build && cp ./build/icons/icon.icns ./build && cp ./build/icons/1024x1024.png ./build/icon.png && rimraf ./build/icons",
     "postinstall": "electron-builder install-app-deps"
   },

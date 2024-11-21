@@ -9,7 +9,7 @@ import config from './app/utils/config.js';
 import isDev from 'electron-is-dev';
 import fs from 'fs';
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
+const __dirname = import.meta.dirname;
 
 const APP_NAME = 'hypetype';
 const APP_VERSION = packageJson.version;
@@ -38,16 +38,8 @@ function createTray() {
 
   fs.watchFile(appData.configFile, async (curr, prev) => {
     console.log('Config file changed');
-
-
     tray.setContextMenu(createMenu());
-
     registerShortcuts();
-
-
-    // menu = await appMenu.getMenu();
-
-    // tray.setContextMenu(menu);
 });
 }
 
@@ -140,7 +132,7 @@ app.whenReady().then(async () => {
     /**
      * Don't show app in the dock
      */
-    app.dock.hide();
+    // app.dock.hide();
 
     if (!isDev) {
       require('./app/utils/autoupdater');
