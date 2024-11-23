@@ -8,7 +8,8 @@
   "scripts": {
     "start": "tsc && electron .",
     "build": "tsc && electron-builder",
-    "dev": "tsc --watch & electron ."
+    "dev": "tsc --watch & electron .",
+    "postinstall": "electron-builder install-app-deps"
   },
   "keywords": [],
   "author": "",
@@ -47,7 +48,6 @@
     "@types/node": "^22.9.1",
     "electron": "^33.2.0",
     "electron-builder": "^25.1.8",
-    "electron-rebuild": "^3.2.9",
     "typescript": "^5.7.2"
   }
 }
