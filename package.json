@@ -3,7 +3,7 @@
   "productName": "hypetype",
   "version": "1.0.0",
   "description": "Flow symbol type app",
-  "main": "app/main.js",
+  "main": "app-build/main.js",
   "type": "module",
   "scripts": {
     "start": "tsc && electron .",

@@ -7,7 +7,7 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./app",
+    "outDir": "./app-build",
     "baseUrl": "./",
     "paths": {
       "*": ["src/*"]
