@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
 
       - name: Install Node.js, NPM and Yarn
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: 22
 
@@ -24,8 +24,7 @@ jobs:
 
       # build and save artifacts
       - name: Build app
-        run: |
-          npm run build
+        run: npm run build
 
       # - name: Build and release
       #   uses: samuelmeuli/action-electron-builder@v1

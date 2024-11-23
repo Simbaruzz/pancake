@@ -44,7 +44,12 @@
     "electron": "^33.2.0",
     "electron-builder": "^25.1.8",
     "electron-icon-builder": "^2.0.1",
+    "nan": "2.18.0",
+    "node-gyp": "10.0.1",
     "rimraf": "^5.0.10",
     "typescript": "^5.7.2"
+  },
+  "resolutions": {
+    "nan": "2.18.0"
   }
 }
