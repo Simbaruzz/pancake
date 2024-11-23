@@ -20,18 +20,18 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install Python setup tools
-        run: |
-          pip install setuptools
+      # - name: Install Python setup tools
+      #   run: |
+      #     pip install setuptools
 
-      - name: Show python version
-        run: python --version
+      # - name: Show python version
+      #   run: python --version
 
-      - name: Install node-gyp
-        run: npm install -g node-gyp
+      # - name: Install node-gyp
+      #   run: npm install -g node-gyp
 
-      - name: Show node-gyp version
-        run: node-gyp --version
+      # - name: Show node-gyp version
+      #   run: node-gyp --version
 
       - name: Install deps
         run: npm install
