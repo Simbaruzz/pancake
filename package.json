@@ -9,7 +9,7 @@
     "start": "tsc && electron .",
     "build": "tsc && electron-builder",
     "dev": "tsc --watch & electron ."
-  },
+  }, 
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -18,13 +18,18 @@
     "artifactName": "${productName}.${ext}",
     "productName": "hypetype",
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "icon": "assets/app-icons/icon.ico"
     },
     "linux": {
       "target": [
         "AppImage",
         "deb"
-      ]
+      ],
+      "icon": "assets/app-icons/icon.png"
+    },
+    "mac": {
+      "icon": "assets/app-icons/icon.icns"
     }
   },
   "dependencies": {
