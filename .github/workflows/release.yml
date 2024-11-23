@@ -9,7 +9,8 @@ jobs:
     strategy:
       matrix:
         # os: [macos-latest, ubuntu-latest, windows-latest]
-        os: [macos-latest]
+        os: [windows-latest]
+        # os: [macos-latest]
 
     steps:
       - name: Check out Git repository
@@ -43,8 +44,8 @@ jobs:
       - name: Archive production artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: hypetype.dmg
-          path: dist/hypetype.dmg
+          name: hypetype.exe
+          path: dist/hypetype.exe
           retention-days: 1
 
       # - name: Build and release
