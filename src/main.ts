@@ -1,7 +1,6 @@
 import { app, Tray, Menu, globalShortcut } from 'electron';
 import * as path from 'path';
-// import robot from '@jitsi/robotjs';
-import robot from '@todesktop/robotjs-prebuild';
+import robot from '@jitsi/robotjs';
 // import robot from 'robotjs';
 // import { version as APP_VERSION } from '../package.json' assert { type: 'json' };
 // import openBrowser from './utils/opener';
