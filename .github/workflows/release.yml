@@ -40,6 +40,13 @@ jobs:
       - name: Build app
         run: npm run build
 
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: hypetype.dmg
+          path: dist/hypetype.dmg
+          retention-days: 1
+
       # - name: Build and release
       #   uses: samuelmeuli/action-electron-builder@v1
       #   with:
