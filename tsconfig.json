@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./app",
+    "baseUrl": "./",
+    "paths": {
+      "*": ["src/*"]
+    },
+    "rootDir": "./src",
+    "resolveJsonModule": true,
+    "types": ["node", "electron"]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}

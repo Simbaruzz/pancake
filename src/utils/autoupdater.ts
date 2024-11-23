@@ -1,37 +1,43 @@
-import { autoUpdater } from 'electron-updater';
-import logger from './logger';
+import { autoUpdater, UpdateInfo, ProgressInfo } from 'electron-updater';
+import logger from './logger.js';
 
 /**
- * Check for updates every hour
+ * Check for updates every hour.
  */
 const CHECK_FOR_UPDATES_INTERVAL = 60 * 60 * 1000;
 
 /**
- * Autoupdater events
+ * AutoUpdater events handling.
  */
+
+// Event: Checking for updates
 autoUpdater.on('checking-for-update', () => {
   logger.debug('Checking for update');
 });
 
-autoUpdater.on('error', (error) => {
+// Event: Error during update process
+autoUpdater.on('error', (error: Error) => {
   logger.error('Error while checking for updates', error);
 });
 
-autoUpdater.on('update-available', (updateInfo) => {
+// Event: Update available
+autoUpdater.on('update-available', (updateInfo: UpdateInfo) => {
   logger.debug('Update is available:', updateInfo);
 });
 
-autoUpdater.on('update-not-available', (updateInfo) => {
+// Event: No updates available
+autoUpdater.on('update-not-available', (updateInfo: UpdateInfo) => {
   logger.debug('No updates are available', updateInfo);
 });
 
-autoUpdater.on('download-progress', (progressInfo) => {
+// Event: Download progress
+autoUpdater.on('download-progress', (progressInfo: ProgressInfo) => {
   const logMessage = `speed ${progressInfo.bytesPerSecond} b/s; progress ${progressInfo.percent}%; downloaded ${progressInfo.transferred} out of ${progressInfo.total} bytes`;
-
   logger.debug(logMessage);
 });
 
-autoUpdater.on('update-downloaded', (updateInfo) => {
+// Event: Update downloaded
+autoUpdater.on('update-downloaded', (updateInfo: UpdateInfo) => {
   logger.debug('Update is ready', updateInfo);
 
   /**
@@ -41,7 +47,7 @@ autoUpdater.on('update-downloaded', (updateInfo) => {
 });
 
 /**
- * Check for updates on script start
+ * Check for updates on script start.
  *
  * Silently: autoUpdater.checkForUpdates();
  * With notification: autoUpdater.checkForUpdatesAndNotify();
@@ -49,7 +55,7 @@ autoUpdater.on('update-downloaded', (updateInfo) => {
 autoUpdater.checkForUpdatesAndNotify();
 
 /**
- * Check for updates with given time interval
+ * Check for updates at regular intervals.
  */
 setInterval(() => {
   autoUpdater.checkForUpdatesAndNotify();

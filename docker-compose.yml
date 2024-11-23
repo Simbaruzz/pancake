@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  electron-builder:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: 'npm i && npm run build'
+    volumes:
+      # Mount project directory to persist source files and build outputs
+      - .:/app
+      # Cache Electron and electron-builder dependencies for faster builds
+      - electron_cache:/root/.cache/electron
+      - electron_builder_cache:/root/.cache/electron-builder
+    environment:
+      # Ensure proper Node.js environment
+      - NODE_ENV=production
+      # Cache directories for Electron and electron-builder
+      - ELECTRON_CACHE=/root/.cache/electron
+      - ELECTRON_BUILDER_CACHE=/root/.cache/electron-builder
+    # Enable access to Docker daemon for multi-platform builds
+    privileged: true
+
+volumes:
+  electron_cache:
+  electron_builder_cache:
