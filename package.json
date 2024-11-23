@@ -9,7 +9,7 @@
     "start": "tsc && electron .",
     "build": "tsc && electron-builder",
     "dev": "tsc --watch & electron ."
-  }, 
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
