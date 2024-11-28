@@ -35,17 +35,17 @@ jobs:
       - name: Archive production artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: hypetype app
-          path: dist/hypetype.*
+          name: hypetype.exe
+          path: dist/hypetype.exe
           retention-days: 1
 
-      # - name: Archive production artifacts (macOS)
-      #   if: matrix.os == 'macos-latest'
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: hypetype.dmg
-      #     path: dist/hypetype.dmg
-      #     retention-days: 1
+      - name: Archive production artifacts (macOS)
+        if: matrix.os == 'macos-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: hypetype.dmg
+          path: dist/hypetype.dmg
+          retention-days: 1
 
       # - name: Build and release
       #   uses: samuelmeuli/action-electron-builder@v1
