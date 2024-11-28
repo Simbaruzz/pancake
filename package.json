@@ -7,7 +7,7 @@
   "type": "module",
   "scripts": {
     "start": "tsc && electron .",
-    "build": "tsc && electron-builder --publish=never --win",
+    "build": "tsc && electron-builder --publish=never",
     "dev": "tsc --watch & electron .",
     "postinstall": "electron-builder install-app-deps"
   },
@@ -18,6 +18,10 @@
     "appId": "ru.hypetype.keyboard",
     "artifactName": "${productName}.${ext}",
     "productName": "hypetype",
+    "asar": true,
+    "asarUnpack": [
+      "**/*.node"
+    ],
     "win": {
       "target": "nsis",
       "icon": "assets/app-icons/icon.ico"
@@ -34,7 +38,7 @@
     }
   },
   "dependencies": {
-    "@jitsi/robotjs": "^0.6.13",
+    "@nut-tree-fork/nut-js": "^4.2.2",
     "auto-launch": "^5.0.6",
     "electron-is-dev": "^1.2.0",
     "electron-updater": "^4.3.5",

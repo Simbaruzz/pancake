@@ -1,7 +1,8 @@
-import { app, Tray, Menu, globalShortcut } from 'electron';
 import * as path from 'path';
-import robot from '@jitsi/robotjs';
-// import robot from 'robotjs';
+import * as fs from 'fs';
+
+import { app, Tray, Menu, globalShortcut } from 'electron';
+import nut from '@nut-tree-fork/nut-js';
 // import { version as APP_VERSION } from '../package.json' assert { type: 'json' };
 // import openBrowser from './utils/opener';
 import autolaunch from './utils/autolaunch.js';
@@ -10,8 +11,8 @@ import logger from './utils/logger.js';
 
 import config from './utils/config.js';
 import isDev from 'electron-is-dev';
-import * as fs from 'fs';
 
+logger.info('=== App started ===');
 const __dirname = import.meta.dirname;
 
 const APP_NAME = 'hypetype';
@@ -60,16 +61,16 @@ async function registerShortcuts() {
   }
 }
 
-function pasteSpecialString(stringToBePasted: string) {
+async function pasteSpecialString(stringToBePasted: string) {
   logger.log(`Pasting special string: ${stringToBePasted}`);
-  robot.typeString(stringToBePasted);
+  nut.keyboard.type(stringToBePasted);
+
+  logger.log(`done`);
 }
 
 async function createMenu() {
   SHORTCUTS_DICT = await config.get();
 
-  logger.info('SHORTCUTS_DICT:');
-  logger.info(JSON.stringify(SHORTCUTS_DICT));
   registerShortcuts();
 
   const items = Object.keys(SHORTCUTS_DICT).map((key) => ({
@@ -82,6 +83,7 @@ async function createMenu() {
     {
       // label: `${APP_NAME} v${APP_VERSION}`,
       label: `${APP_NAME}`,
+      enabled: false,
       // click: () => openBrowser('https://github.com/Simbaruzz/hypetype'),
     },
     { type: 'separator' },
@@ -102,8 +104,6 @@ async function createMenu() {
 
 app.whenReady().then(async () => {
   try {
-    logger.info('=== App started ===');
-
     await createTray();
 
     if (process.platform === 'darwin' && app.dock) app.dock.hide();
