@@ -1,2 +1,2 @@
-# hypetype
+# pancake soft
 Flow symbol type
